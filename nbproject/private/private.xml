@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Y:/www/wp.local.com/wp-includes/plugin.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/WPSession/readme.txt</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/akismet.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/WPSession/WPSession.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/admin.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/akismet.css</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/ConstestSubmitForm/readme.txt</file>
+            <file>file:/Y:/www/wp.local.com/index.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/index.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-includes/pluggable.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/ConstestSubmitForm/ContestSubmitForm.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/legacy.php</file>
+            <file>file:/Y:/www/wp.local.com/wp-content/plugins/akismet/akismet.js</file>
         </group>
     </open-files>
 </project-private>

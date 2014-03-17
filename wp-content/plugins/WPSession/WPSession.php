@@ -19,6 +19,11 @@ Author URI:
         session_destroy();
     }
 
+    function initTimeConst() {
+        define('TIME_NOW', time());
+    }
+
+    add_action('init', 'initTimeConst', 1);
     add_action('init', 'startSession', 1);
     add_action('wp_logout', 'stopSession');
     add_action('wp_login', 'stopSession');
