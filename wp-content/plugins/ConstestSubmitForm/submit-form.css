@@ -1,0 +1,22 @@
+.problem-submit-block {
+    float:left;
+    width:100%;
+    border:1px solid #EEE;
+    padding: 10px;
+}
+
+.problem-submit-block .left-block {
+    float:left;
+    width:80%;
+}
+
+.problem-submit-block .right-block {
+    float:left;
+    width:19%;
+}
+
+.clear {
+    clear: both;
+    display: block;
+    padding: 3px;
+}
