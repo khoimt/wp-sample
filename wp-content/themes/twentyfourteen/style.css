@@ -1015,7 +1015,7 @@ span + .edit-link:before,
 
 .hentry {
 	margin: 0 auto 48px;
-	max-width: 672px;
+	min-width: 672px;
 }
 
 .site-content .entry-header,
@@ -1024,7 +1024,8 @@ span + .edit-link:before,
 .site-content .entry-meta,
 .page-content {
 	margin: 0 auto;
-	max-width: 474px;
+	/*max-width: 800px;*/
+    min-width: 800px;
 }
 
 .page-content {
@@ -1539,6 +1540,7 @@ a.post-thumbnail:hover {
 	margin: 24px auto 48px;
 	max-width: 474px;
 	padding: 0 10px;
+    display:none;
 }
 
 .post-navigation a,
