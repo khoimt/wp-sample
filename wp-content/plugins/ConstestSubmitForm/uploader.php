@@ -61,7 +61,7 @@ class ProblemUploader {
      */
     public function insert2DB ($name, $filePath) {
         $userLogin = self::$_user->get('user_login');
-        $probName = substr($name, strlen($name) - 4);
+        $probName = substr($name, 0, strlen($name) - 4);
 
         $this->deleteOldSubmition($probName, $userLogin);
         if ($this->insertSubmition($probName, $filePath, $userLogin) == self::ERROR) {
@@ -90,13 +90,13 @@ class ProblemUploader {
             'prob_name' => $probName,
             'path' => $filePath,
             'score' => 0,
-            'num_test' => $problemInfo->num_test,
-            'test_result' => '',
+            'max_score' => $problemInfo->max_score,
+            'score_detail' => '',
             'status' => 'pending',
             'deleted' => 0
         );
 
-        if ($wpdb->replace($insertedData)) {
+        if ($wpdb->replace(self::$_submitTable, $insertedData)) {
             return self::SUCCESS;
         }
         return self::ERROR;
