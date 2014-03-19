@@ -1107,4 +1107,5 @@ html:lang(he-il) .rtl #wpadminbar *  {
 		-webkit-box-shadow: none;
 		box-shadow: none;
 	}
+    #wp-admin-bar-wp-logo {display:none !important;}
 }

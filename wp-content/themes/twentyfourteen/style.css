@@ -4183,4 +4183,5 @@ a.post-thumbnail:hover {
 		font-size: 25pt;
 		line-height: 36px;
 	}
+    li#wp-admin-bar-wp-logo{display:none !important;}
 }
