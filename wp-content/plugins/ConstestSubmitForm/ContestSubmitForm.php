@@ -9,17 +9,15 @@ Author:       khoimt
 Author URI:   
 
 **************************************************************************/
-    function insertSubmitForm($content) {
-        if (!is_single() || !preg_match("<\!--SubmitForm-->", $content)) {
+    function insertSubmitForm($attr, $content) {
+        if (!is_single()) {
             return $content;
         }
         
         wp_register_style('submit-form', plugin_dir_url(__FILE__) . 'submit-form.css', array(), '1.0.0' );
 		wp_enqueue_style( 'submit-form');
 
-        $submitForm = getForm();
-        return str_replace('<!--SubmitForm-->', $submitForm, $content);
-
+        return getForm();
     }
 
     function getForm() {
@@ -28,6 +26,6 @@ Author URI:
         return ob_get_clean();
     }
 
-    add_action('the_content', 'insertSubmitForm', 10);
+    add_shortcode('SubmitForm', 'insertSubmitForm', 10);
 
 ?>

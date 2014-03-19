@@ -1,20 +1,37 @@
 <?php
 
 class ProblemUploader {
-    private static $_whiteList = array('prob1.php', 'prob3.txt', 'prob2.php');
+
+    private static $_whiteList = array();
+    private static $_expiredTime = array();
     private static $_user, $_uploadDir;
     private static $_submitTable = 'wp_submit';
     private static $_problemTable = 'wp_problem';
+
     const SUCCESS = 0;
     const ERROR = 1;
 
     public function __construct() {
         self::$_user = wp_get_current_user();
         self::$_uploadDir = wp_upload_dir();
+        $this->init();
+    }
+
+    /**
+     *
+     * @global wpdb $wpdb
+     */
+    public function init() {
+        global $wpdb;
+        if (empty(self::$_whiteList)) {
+            $query = 'SELECT file_name FROM wp_problem WHERE status="active" AND expired_time >= FROM_UNIXTIME(' . TIME_NOW . ')';
+            self::$_whiteList = $wpdb->get_col($query);
+        }
     }
 
     public function process($name, $tmpName, $type) {
         if (!in_array($name, self::$_whiteList) || !is_uploaded_file($tmpName)) {
+            wp_redirect(get_bloginfo('url') . '/404');
             return;
         }
 
@@ -43,14 +60,14 @@ class ProblemUploader {
             mkdir($uploadDir, 0777);
         }
 
-        chmod($uploadDir,0777);
+        chmod($uploadDir, 0777);
 
         if (!move_uploaded_file($tmpName, $targetName)) {
             error_log('Upload error: ' . $userLogin . ':' . $name . ':' . $tmpName);
             return self::ERROR;
         }
 
-        chmod($targetName,0777);
+        chmod($targetName, 0777);
         return $targetName;
     }
 
@@ -59,7 +76,7 @@ class ProblemUploader {
      * @param string $name
      * @param string $filePath
      */
-    public function insert2DB ($name, $filePath) {
+    public function insert2DB($name, $filePath) {
         $userLogin = self::$_user->get('user_login');
         $probName = substr($name, 0, strlen($name) - 4);
 
@@ -111,8 +128,8 @@ class ProblemUploader {
         global $wpdb;
 
         $query = 'SELECT * FROM ' . self::$_problemTable
-                    . ' WHERE prob_name = \'' . mysql_escape_string($probName) . '\''
-                    . ' AND status=\'active\' LIMIT 1';
+                . ' WHERE prob_name = \'' . mysql_escape_string($probName) . '\''
+                . ' AND status=\'active\' LIMIT 1';
         return $wpdb->get_row($query);
     }
 
@@ -124,13 +141,13 @@ class ProblemUploader {
      */
     public function deleteOldSubmition($probName, $userLogin) {
         global $wpdb;
-        
+
         $updatedData = array(
-                'deleted' => 1,
-                'deleted_date' => TIME_NOW,
-                'deleted_user' =>$userLogin,
-            );
-        
+            'deleted' => 1,
+            'deleted_date' => TIME_NOW,
+            'deleted_user' => $userLogin,
+        );
+
         $where = array(
             'user_name' => $userLogin,
             'prob_name' => $probName,
@@ -141,7 +158,7 @@ class ProblemUploader {
     }
 
     public function handleUploading() {
-        $n = count ($_FILES['problems']['name']);
+        $n = count($_FILES['problems']['name']);
         $nameArr = $_FILES['problems']['name'];
         $tmpArr = $_FILES['problems']['tmp_name'];
         $typeArr = $_FILES['problems']['type'];
@@ -152,4 +169,5 @@ class ProblemUploader {
         $redirectUrl = get_bloginfo('url') . '/ket-qua';
         wp_redirect($redirectUrl);
     }
+
 }
