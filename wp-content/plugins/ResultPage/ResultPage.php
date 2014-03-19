@@ -10,6 +10,8 @@ Author URI:
 
 **************************************************************************/
 function insertResultPage( $atts, $content, $name ) {
+    wp_register_style('result-page', plugin_dir_url(__FILE__) . 'result-page.css', array(), '1.0.0' );
+    wp_enqueue_style( 'result-page');
      return getResultTable();
 }
 
@@ -20,6 +22,5 @@ function getResultTable() {
 }
 
 add_shortcode('result_page', 'insertResultPage');
-
 
 ?>
