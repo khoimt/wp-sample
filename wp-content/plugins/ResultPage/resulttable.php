@@ -82,7 +82,7 @@ __QUERY__;
             $scoreDetail = $value['score_detail'];
 
             $item[$probName] = empty($status)
-                                ? 'Not Submit'
+                                ? 'Wait submit'
                                 : (empty($scoreDetail) ? $status : $scoreDetail);
         }
 
