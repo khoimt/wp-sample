@@ -1,4 +1,13 @@
 <?php
+    if (!is_user_logged_in()) :
+       echo "<div class=\"msg\" style='font-weight:bold'>
+            You must login to submit your result
+        </div>";
+        return;
+    endif;
+?>
+
+<?php
     $fields = array(
         'User',  'Email', 'Score'
     );
