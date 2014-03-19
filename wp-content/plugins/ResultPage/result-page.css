@@ -1,0 +1,14 @@
+.result-table {
+    line-height: 21px;
+    font-size: 16px;
+}
+
+.rstbl-header {
+    font-family: serif arial tahoma;
+}
+
+.result-cell {
+    border-top : 2px solid;
+    line-height: 21px;
+    font-size: 16px;
+}
