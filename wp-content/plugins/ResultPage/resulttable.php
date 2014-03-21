@@ -20,11 +20,13 @@
 
 <div class="clear"></div>
 <table id="result-table" class="result-table">
-    <tr class="rstbl-header-row">
-        <?php foreach($fields as $field): ?>
-        <th class="rstbl-header"><?php echo $field ?></th>
-        <?php endforeach;?>
-    </tr>
+    <thead>
+        <tr class="rstbl-header-row">
+            <?php foreach($fields as $field): ?>
+            <th class="rstbl-header"><?php echo $field ?></th>
+            <?php endforeach;?>
+        </tr>
+    </thead>
     
     <?php foreach($dataArr as $row): ?>
 
