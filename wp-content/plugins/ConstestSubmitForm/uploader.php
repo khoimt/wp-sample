@@ -31,7 +31,7 @@ class ProblemUploader {
 
     public function process($name, $tmpName, $type) {
         if (!in_array($name, self::$_whiteList) || !is_uploaded_file($tmpName)) {
-            wp_redirect(get_bloginfo('url') . '/404');
+            wp_die("Lỗi: Đã hết thời gian nộp bài hoặc tên file không hợp lệ.");
             return;
         }
 
@@ -57,17 +57,17 @@ class ProblemUploader {
         $targetName = $uploadDir . '/' . $newName;
 
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777);
+            mkdir($uploadDir, 0755);
         }
 
-        chmod($uploadDir, 0777);
+        chmod($uploadDir, 0755);
 
         if (!move_uploaded_file($tmpName, $targetName)) {
             error_log('Upload error: ' . $userLogin . ':' . $name . ':' . $tmpName);
             return self::ERROR;
         }
 
-        chmod($targetName, 0777);
+        chmod($targetName, 0755);
         return $targetName;
     }
 
@@ -158,13 +158,21 @@ class ProblemUploader {
     }
 
     public function handleUploading() {
+		$c = 0;
         $n = count($_FILES['problems']['name']);
         $nameArr = $_FILES['problems']['name'];
         $tmpArr = $_FILES['problems']['tmp_name'];
         $typeArr = $_FILES['problems']['type'];
         for ($i = 0; $i < $n; $i++) {
+			if (empty($nameArr[$i]) || empty($tmpArr[$i])) {
+				continue;
+			} else {
+				$c++;
+			}
             $this->process($nameArr[$i], $tmpArr[$i], $typeArr[$i]);
         }
+		
+		if ($c == 0) wp_die('Không có dữ liệu');
 
         $redirectUrl = get_bloginfo('url') . '/ket-qua';
         wp_redirect($redirectUrl);
