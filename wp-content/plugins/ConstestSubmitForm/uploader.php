@@ -110,7 +110,8 @@ class ProblemUploader {
             'max_score' => $problemInfo->max_score,
             'score_detail' => '',
             'status' => 'pending',
-            'deleted' => 0
+            'deleted' => 0,
+	    'created_date' => TIME_NOW,
         );
 
         if ($wpdb->replace(self::$_submitTable, $insertedData)) {
